@@ -1,3 +1,7 @@
+This repository is for testing code and creating the database structure for the Team2059 Digital Scouting Application.
+
+
+Final GOAL in Team2059_Scouting Repository:
 Digital_Scouting Database for FRC Robotics Competition
 
 Application to track and analyze match data.
