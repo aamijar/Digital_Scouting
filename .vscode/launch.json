@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - WriterFile",
+            "request": "launch",
+            "mainClass": "WriterFile"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ReadFile",
+            "request": "launch",
+            "mainClass": "ReadFile"
+        }
+    ]
+}
