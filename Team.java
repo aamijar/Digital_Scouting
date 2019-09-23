@@ -8,11 +8,13 @@ public class Team {
     private int wins;
     private int losses;
     private int pointsScored;
-    Team(int number, String name, String district)
+    private int [] teamStats;
+    Team(int number, String name, String district, int [] stats)
     {
         teamNumber = number;
         teamName = name;
         homeDistrict = district;
+        teamStats = stats;
     }
     public int getTeamNumber()
     {
@@ -25,5 +27,9 @@ public class Team {
     public String getHomeDistrict()
     {
         return homeDistrict;
+    }
+    public int [] getStats()
+    {
+        return teamStats;
     }
 }
