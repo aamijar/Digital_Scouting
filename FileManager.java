@@ -8,7 +8,7 @@ public class FileManager
 {
     public static void writeFile(ArrayList<String> stats) throws IOException
     {
-        PrintWriter writer = new PrintWriter("samplewrite.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("sample.txt", "UTF-8");
         
         for(int i = 0; i < stats.size(); i ++)
         {
@@ -18,17 +18,18 @@ public class FileManager
         writer.close();
     }
 
-    public static void readFile(String path) throws IOException
+    public static ArrayList<String> readFile(String path) throws IOException
     {
         File sampleFile = new File(path);
         
         Scanner sc = new Scanner(sampleFile);
-        
+        ArrayList<String> strList = new ArrayList<String>();
         while(sc.hasNextLine())
         {
-            System.out.println(sc.nextLine());
+            strList.add(sc.nextLine());
         }
-        sc.close();  
+        sc.close();
+        return strList;  
     }
 
 }

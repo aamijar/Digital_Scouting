@@ -6,25 +6,25 @@ public class SampleRunner
 {
     public static void main(String [] args) throws IOException
     {
-        // String [] statsArr = {"frc2059","frc5190","frc2655"};
-        // FileManager.writeFile(statsArr);
+        
+        //initialize .txt filepath on local disk, temp location
+        String filePath = "C:\\Users\\aamij\\Documents\\Hitchhikers\\Code\\Digital_Scouting\\sample.txt";
 
-        // String filePath = "C:\\Users\\aamij\\Documents\\Hitchhikers\\Code\\Digital_Scouting\\sample.txt";
-        // FileManager.readFile(filePath);
 
+        //simulate text entries from app scout sheet
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a scout sheet.");
         String str = sc.nextLine();
 
+        //write one scout sheet to file
         ArrayList<String> sheetArr = new ArrayList<String>(splitToArrayList(str));
-        System.out.println(sheetArr);
+        System.out.println("Write File:" + sheetArr);
 
+        //read one scout sheet from file
         FileManager.writeFile(sheetArr);
-
-        // String str1 = "Yes, Please";
-        // String [] strArr = str1.split(",");
-        // System.out.println(strArr);
-        //ArrayList<String> test = new ArrayList<String>();
+        ArrayList<String> sheetArrFile = new ArrayList<String>(FileManager.readFile(filePath));
+        System.out.println("Read File:" + sheetArrFile);
+        
         sc.close();
     }
 
