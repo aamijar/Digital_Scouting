@@ -16,7 +16,10 @@ public class SampleRunner
         System.out.println("Enter a scout sheet.");
         String str = sc.nextLine();
 
-        System.out.println(splitToArrayList(str));
+        ArrayList<String> sheetArr = new ArrayList<String>(splitToArrayList(str));
+        System.out.println(sheetArr);
+
+        FileManager.writeFile(sheetArr);
 
         // String str1 = "Yes, Please";
         // String [] strArr = str1.split(",");
@@ -29,11 +32,12 @@ public class SampleRunner
     {
         ArrayList<String> strList = new ArrayList<String>();
         String splitStr = "";
-        for(int i = 0; i < str.length() - 1; i ++)
+        for(int i = 0; i < str.length(); i ++)
         {
             if(str.substring(i, i + 1).equals(","))
             {
-                strList.add(splitStr);    
+                strList.add(splitStr);
+                splitStr = ""; 
             }
             else
             {
