@@ -1,18 +1,15 @@
-
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.BufferedWriter;
 
-public class WriterFile
+
+public class WriteFile
 {
     public static void main(String [] args) throws IOException
     {
-        String filePath = "C:\\Users\\aamij\\Documents\\Hitchhikers\\Code\\Digital_Scouting\\sample.txt";
-        
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        writer.write("Team Name");
+        System.out.println("Hello World!");
+        PrintWriter writer = new PrintWriter("samplewrite.txt", "UTF-8");
+        writer.println("frc2059");
+        writer.println("frc5190");
         writer.close();
     }
 }
