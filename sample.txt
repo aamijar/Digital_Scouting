@@ -1,5 +1,2 @@
-Hitchhikers
-2059
-FNC
-20
-true
+yes
+y

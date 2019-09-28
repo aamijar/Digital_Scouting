@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class SampleRunner
 {
@@ -9,7 +10,7 @@ public class SampleRunner
         
         //initialize .txt filepath on local disk, temp location
         String filePath = "C:\\Users\\aamij\\Documents\\Hitchhikers\\Code\\Digital_Scouting\\sample.txt";
-
+        String dirPath = "C:\\Users\\aamij\\Documents\\Hitchhikers\\Code\\Digital_Scouting\\TextFiles";
 
         //simulate text entries from app scout sheet
         Scanner sc = new Scanner(System.in);
@@ -29,25 +30,15 @@ public class SampleRunner
         //0 = teamName ex. Hitchhikers
         //1 = teamNumber ex. 2059
         //2 = teamHomeDistrict ex. FNC
-        //3 = totalMatchPointsScored ex. 20
-        //4 = matchResult, True = win, False = loss ex. True
-        boolean matchResult;
+        //3 = matchNumber ex. 1
+        //4 = totalMatchPointsScored ex. 20
+        //5 = matchResult, True = win, False = loss ex. True
+
         int [] stats = {}; //empty arr for now
-        if(sheetArrRead.get(4).equals("true"))
-        {
-            matchResult = true;
-        }
-        else
-        {
-            matchResult = false;
-        }
+        ArrayList<Team> frcMatches = readData(dirPath);
+        System.out.println(frcMatches.get(0).getHomeDistrict());
+        //System.out.println(frcMatches.get(0).getMatchResult());
 
-        Team frc2059 = new Team(sheetArrRead.get(0), sheetArrRead.get(1), sheetArrRead.get(2),stats);
-        //Team frc2059 = new Team("Hitchhikers", "2059", "FNC",stats);
-        Match frc2059m1 = new Match(frc2059, Integer.parseInt(sheetArrRead.get(3)), matchResult);
-
-
-        System.out.println(frc2059m1.getTeam().getTeamNumber());
         sc.close();
     }
 
@@ -69,6 +60,70 @@ public class SampleRunner
         }
         strList.add(splitStr);
         return strList;
+    }
+    public static ArrayList<Team> readData(String path) throws IOException
+    {
+        ArrayList<Match> matches = new ArrayList<Match>();
+        
+        File dir = new File(path);
+        File [] dirFiles = dir.listFiles();
+        for(File file : dirFiles)
+        {
+            String filePath = file.getAbsolutePath();
+            ArrayList<String> teamData = FileManager.readFile(filePath);
+            boolean matchResult;
+            if(teamData.get(5).equals("true"))
+            {
+                matchResult = true;
+            }
+            else
+            {
+                matchResult = false;
+            }
+            matches.add(new Match(teamData.get(0), Integer.parseInt(teamData.get(3)),Integer.parseInt(teamData.get(4)), matchResult));
+        }
+        
+        return(createTeams(path, matches));
+    }
+
+
+    //helper method
+    private static ArrayList<Team> createTeams(String path, ArrayList<Match> mlist) throws IOException
+    {
+        ArrayList<String> usedTeams = new ArrayList<String>();
+        ArrayList<Team> teamList = new ArrayList<Team>();
+        int [] stats = {0,0,0}; //placeholder
+        File dir = new File(path);
+        File [] dirFiles = dir.listFiles();
+        for(File file : dirFiles)
+        {
+            String filePath = file.getAbsolutePath();
+            ArrayList<String> teamData = FileManager.readFile(filePath);
+            ArrayList<Match> currentTeamMatches = new ArrayList<Match>();
+            
+            for(Match m : mlist)
+            {
+                if(teamData.get(0).equals(m.getTeamName()))
+                {
+                    currentTeamMatches.add(m); 
+                    for(int i = 0; i < usedTeams.size(); i ++)
+                    {
+                        System.out.println(i);
+                        if(usedTeams.get(i).equals(teamData.get(0)))
+                        {
+                            currentTeamMatches.clear();  
+                        }
+                    }
+                    usedTeams.add(m.getTeamName());
+                }
+            }
+            if(currentTeamMatches.size() > 0)
+            {
+                teamList.add(new Team(teamData.get(0), teamData.get(1), teamData.get(2), currentTeamMatches, stats));
+            }
+            currentTeamMatches.clear();
+        }
+        return teamList;
     }
 
 }

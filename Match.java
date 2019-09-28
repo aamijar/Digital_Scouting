@@ -1,20 +1,26 @@
 public class Match
 {
-    private Team frcTeam;
+    private String teamName;
+    private int matchNumber;
     private int pointsScored;
     private boolean matchResult;
 
 
-    public Match(Team team, int points, boolean result)
+    public Match(String name, int number, int points, boolean result)
     {
-        frcTeam = team;
+        teamName = name;
+        matchNumber = number;
         pointsScored = points;
         matchResult = result;
     }
 
-    public Team getTeam()
+    public String getTeamName()
     {
-        return frcTeam;
+        return teamName;
+    }
+    public int getMatchNumber()
+    {
+        return matchNumber;
     }
     public int getMatchPoints()
     {
