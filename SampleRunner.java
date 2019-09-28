@@ -22,9 +22,32 @@ public class SampleRunner
 
         //read one scout sheet from file
         FileManager.writeFile(sheetArr);
-        ArrayList<String> sheetArrFile = new ArrayList<String>(FileManager.readFile(filePath));
-        System.out.println("Read File:" + sheetArrFile);
+        ArrayList<String> sheetArrRead = new ArrayList<String>(FileManager.readFile(filePath));
+        System.out.println("Read File:" + sheetArrRead);
         
+        //define temporary index system to interperet sheetArrRead
+        //0 = teamName ex. Hitchhikers
+        //1 = teamNumber ex. 2059
+        //2 = teamHomeDistrict ex. FNC
+        //3 = totalMatchPointsScored ex. 20
+        //4 = matchResult, True = win, False = loss ex. True
+        boolean matchResult;
+        int [] stats = {}; //empty arr for now
+        if(sheetArrRead.get(4).equals("true"))
+        {
+            matchResult = true;
+        }
+        else
+        {
+            matchResult = false;
+        }
+
+        Team frc2059 = new Team(sheetArrRead.get(0), sheetArrRead.get(1), sheetArrRead.get(2),stats);
+        //Team frc2059 = new Team("Hitchhikers", "2059", "FNC",stats);
+        Match frc2059m1 = new Match(frc2059, Integer.parseInt(sheetArrRead.get(3)), matchResult);
+
+
+        System.out.println(frc2059m1.getTeam().getTeamNumber());
         sc.close();
     }
 

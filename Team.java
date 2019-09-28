@@ -1,21 +1,21 @@
 public class Team {
     
-    private int teamNumber;
+    private String teamNumber;
     private String teamName;
     private String homeDistrict;
     private int [] teamStats;
     
-    Team(int number, String name, String district, int [] stats)
+    Team(String name, String number, String district, int [] stats)
     {
-        teamNumber = number;
         teamName = name;
+        teamNumber = number;
         homeDistrict = district;
         teamStats = stats;
     }
     
     
     
-    public int getTeamNumber()
+    public String getTeamNumber()
     {
         return teamNumber;
     }
