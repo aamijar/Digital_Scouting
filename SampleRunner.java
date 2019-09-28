@@ -36,7 +36,8 @@ public class SampleRunner
 
         int [] stats = {}; //empty arr for now
         ArrayList<Team> frcMatches = readData(dirPath);
-        System.out.println(frcMatches.get(0).getHomeDistrict());
+        ArrayList<Match> games = frcMatches.get(0).getMatches();
+        System.out.println(games.get(0));
         //System.out.println(frcMatches.get(0).getMatchResult());
 
         sc.close();
@@ -106,19 +107,12 @@ public class SampleRunner
                 if(teamData.get(0).equals(m.getTeamName()))
                 {
                     currentTeamMatches.add(m); 
-                    for(int i = 0; i < usedTeams.size(); i ++)
-                    {
-                        System.out.println(i);
-                        if(usedTeams.get(i).equals(teamData.get(0)))
-                        {
-                            currentTeamMatches.clear();  
-                        }
-                    }
-                    usedTeams.add(m.getTeamName());
+                    System.out.println(m);
                 }
             }
             if(currentTeamMatches.size() > 0)
             {
+                System.out.println(currentTeamMatches.get(0).getMatchPoints());
                 teamList.add(new Team(teamData.get(0), teamData.get(1), teamData.get(2), currentTeamMatches, stats));
             }
             currentTeamMatches.clear();
