@@ -35,9 +35,12 @@ public class SampleRunner
         //5 = matchResult, True = win, False = loss ex. True
 
         int [] stats = {}; //empty arr for now
+        //matche objects working as expected.
         ArrayList<Team> frcMatches = readData(dirPath);
-        ArrayList<Match> games = frcMatches.get(0).getMatches();
-        System.out.println(games.get(0));
+        System.out.println(frcMatches.get(0).getMatches().get(1));
+
+        //ArrayList<Match> games = frcMatches.get(0).getMatches();
+        //System.out.println(games.get(0));
         //System.out.println(frcMatches.get(0).getMatchResult());
 
         sc.close();
@@ -84,6 +87,7 @@ public class SampleRunner
             matches.add(new Match(teamData.get(0), Integer.parseInt(teamData.get(3)),Integer.parseInt(teamData.get(4)), matchResult));
         }
         
+        //return matches;
         return(createTeams(path, matches));
     }
 
@@ -98,23 +102,39 @@ public class SampleRunner
         File [] dirFiles = dir.listFiles();
         for(File file : dirFiles)
         {
+            boolean teamDone = false;
             String filePath = file.getAbsolutePath();
             ArrayList<String> teamData = FileManager.readFile(filePath);
             ArrayList<Match> currentTeamMatches = new ArrayList<Match>();
+            for(String s : usedTeams)
+            {
+                
+                if(teamData.get(0).equals(s))
+                {
+                    //System.out.println("TEAM USED");
+                    teamDone = true;
+                }
+            }
             
             for(Match m : mlist)
             {
                 if(teamData.get(0).equals(m.getTeamName()))
                 {
                     currentTeamMatches.add(m); 
-                    System.out.println(m);
+                    //System.out.println(m);
                 }
             }
-            if(currentTeamMatches.size() > 0)
+            usedTeams.add(teamData.get(0));
+            //System.out.println(currentTeamMatches.get(0).getMatchPoints());
+            
+            if(!teamDone)
             {
-                System.out.println(currentTeamMatches.get(0).getMatchPoints());
+                //System.out.println("Gotten Here");
                 teamList.add(new Team(teamData.get(0), teamData.get(1), teamData.get(2), currentTeamMatches, stats));
+                
             }
+            
+            
             currentTeamMatches.clear();
         }
         return teamList;
