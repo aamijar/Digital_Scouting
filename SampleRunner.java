@@ -35,13 +35,17 @@ public class SampleRunner
         //5 = matchResult, True = win, False = loss ex. True
 
         int [] stats = {}; //empty arr for now
-        //matche objects working as expected.
+        //MATCH objects working as expected.
         ArrayList<Team> frcMatches = readData(dirPath);
-        System.out.println(frcMatches.get(0).getMatches().get(1));
+        System.out.println(frcMatches.get(0).getMatches());
+        
+        // TEAM OBJECT WORKING as expected.
+        // ArrayList<Match> matches = new ArrayList<Match>();
+        // matches.add(new Match("Hitchhikers", 1, 20, true));
+        // matches.add(new Match("Hitchhikers", 1, 25, false));
+        // Team frc2059 = new Team("Hitchhikers", "2059","FNC",matches, stats);
+        // System.out.println(frc2059.getMatches().get(1).getMatchPoints());
 
-        //ArrayList<Match> games = frcMatches.get(0).getMatches();
-        //System.out.println(games.get(0));
-        //System.out.println(frcMatches.get(0).getMatchResult());
 
         sc.close();
     }
