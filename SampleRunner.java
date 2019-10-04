@@ -1,3 +1,8 @@
+/**
+ * @author Anupam M.
+ *
+ */
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -26,26 +31,19 @@ public class SampleRunner
         ArrayList<String> sheetArrRead = new ArrayList<String>(FileManager.readFile(filePath));
         System.out.println("Read File:" + sheetArrRead);
         
-        //define temporary index system to interperet sheetArrRead
-        //0 = teamName ex. Hitchhikers
-        //1 = teamNumber ex. 2059
-        //2 = teamHomeDistrict ex. FNC
-        //3 = matchNumber ex. 1
-        //4 = totalMatchPointsScored ex. 20
-        //5 = matchResult, True = win, False = loss ex. True
+        /*
+        define temporary index system to interperet sheetArrRead
+        0 = teamName ex. Hitchhikers
+        1 = teamNumber ex. 2059
+        2 = teamHomeDistrict ex. FNC
+        3 = matchNumber ex. 1
+        4 = totalMatchPointsScored ex. 20
+        5 = matchResult, True = win, False = loss ex. True
+        */
+        int [] stats = {}; //placeholder
 
-        int [] stats = {}; //empty arr for now
-        //MATCH objects working as expected.
         ArrayList<Team> frcMatches = readData(dirPath);
-        System.out.println(frcMatches.get(0).getMatches());
-        
-        // TEAM OBJECT WORKING as expected.
-        // ArrayList<Match> matches = new ArrayList<Match>();
-        // matches.add(new Match("Hitchhikers", 1, 20, true));
-        // matches.add(new Match("Hitchhikers", 1, 25, false));
-        // Team frc2059 = new Team("Hitchhikers", "2059","FNC",matches, stats);
-        // System.out.println(frc2059.getMatches().get(1).getMatchPoints());
-
+        System.out.println(frcMatches.get(1).getMatches().get(0).getTeamName());
 
         sc.close();
     }
@@ -81,18 +79,13 @@ public class SampleRunner
             ArrayList<String> teamData = FileManager.readFile(filePath);
             boolean matchResult;
             if(teamData.get(5).equals("true"))
-            {
-                matchResult = true;
-            }
+            {matchResult = true;}
             else
-            {
-                matchResult = false;
-            }
+            {matchResult = false;}
+            
             matches.add(new Match(teamData.get(0), Integer.parseInt(teamData.get(3)),Integer.parseInt(teamData.get(4)), matchResult));
         }
-        
-        //return matches;
-        return(createTeams(path, matches));
+        return createTeams(path, matches);
     }
 
 
@@ -114,32 +107,19 @@ public class SampleRunner
             {
                 
                 if(teamData.get(0).equals(s))
-                {
-                    //System.out.println("TEAM USED");
-                    teamDone = true;
-                }
+                {teamDone = true;}
             }
             
             for(Match m : mlist)
             {
                 if(teamData.get(0).equals(m.getTeamName()))
-                {
-                    currentTeamMatches.add(m); 
-                    //System.out.println(m);
-                }
+                {currentTeamMatches.add(m);}
             }
             usedTeams.add(teamData.get(0));
-            //System.out.println(currentTeamMatches.get(0).getMatchPoints());
             
             if(!teamDone)
-            {
-                //System.out.println("Gotten Here");
-                teamList.add(new Team(teamData.get(0), teamData.get(1), teamData.get(2), currentTeamMatches, stats));
-                
-            }
+            {teamList.add(new Team(teamData.get(0), teamData.get(1), teamData.get(2), currentTeamMatches, stats));}
             
-            
-            currentTeamMatches.clear();
         }
         return teamList;
     }
