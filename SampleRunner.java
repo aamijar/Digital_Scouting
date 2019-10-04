@@ -38,12 +38,16 @@ public class SampleRunner
         2 = teamHomeDistrict ex. FNC
         3 = matchNumber ex. 1
         4 = totalMatchPointsScored ex. 20
-        5 = matchResult, True = win, False = loss ex. True
+        5 = totalRankPoints ex. 2
+        6 = matchResult, True = win, False = loss ex. True
         */
-        int [] stats = {}; //placeholder
+        //int [] stats = {}; //placeholder
 
         ArrayList<Team> frcMatches = readData(dirPath);
-        System.out.println(frcMatches.get(1).getMatches().get(0).getTeamName());
+        System.out.println("total teams: " + frcMatches.size());
+        System.out.println(frcMatches.get(0).getRankPointAvg());
+        System.out.println(frcMatches.get(1).getMatches());
+        System.out.println(frcMatches.get(2).getMatches());
 
         sc.close();
     }
@@ -78,12 +82,12 @@ public class SampleRunner
             String filePath = file.getAbsolutePath();
             ArrayList<String> teamData = FileManager.readFile(filePath);
             boolean matchResult;
-            if(teamData.get(5).equals("true"))
+            if(teamData.get(6).equals("true"))
             {matchResult = true;}
             else
             {matchResult = false;}
             
-            matches.add(new Match(teamData.get(0), Integer.parseInt(teamData.get(3)),Integer.parseInt(teamData.get(4)), matchResult));
+            matches.add(new Match(teamData.get(0), Integer.parseInt(teamData.get(3)),Integer.parseInt(teamData.get(4)), Double.parseDouble(teamData.get(5)), matchResult));
         }
         return createTeams(path, matches);
     }
@@ -122,6 +126,10 @@ public class SampleRunner
             
         }
         return teamList;
+    }
+    public static ArrayList<Team> sortByDistrictPoints(ArrayList<Team> teams)
+    {
+        
     }
 
 }

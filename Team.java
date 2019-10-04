@@ -39,4 +39,15 @@ public class Team {
     {
         return teamStats;
     }
+    public double getRankPointAvg()
+    {
+        double avg = 0;
+        for(int i = 0; i < matches.size(); i ++)
+        {
+            avg += matches.get(i).getRankPoints();
+
+        }
+        avg = avg/matches.size();
+        return avg;
+    }
 }
