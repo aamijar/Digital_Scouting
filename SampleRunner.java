@@ -1,6 +1,7 @@
 /**
  * @author Anupam M.
- *
+ * 
+ * 
  */
 
 import java.io.IOException;
@@ -48,6 +49,8 @@ public class SampleRunner
         System.out.println(frcMatches.get(0).getRankPointAvg());
         System.out.println(frcMatches.get(1).getMatches());
         System.out.println(frcMatches.get(2).getMatches());
+
+        System.out.println(frcMatches.get(0).getMatches().get(1).getMatchResult());
 
         sc.close();
     }
@@ -127,9 +130,9 @@ public class SampleRunner
         }
         return teamList;
     }
-    public static ArrayList<Team> sortByDistrictPoints(ArrayList<Team> teams)
-    {
+    // public static ArrayList<Team> sortByDistrictPoints(ArrayList<Team> teams)
+    // {
         
-    }
+    // }
 
 }
