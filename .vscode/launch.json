@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - JsonExample",
+            "request": "launch",
+            "mainClass": "JsonExample",
+            "projectName": "Digital_Scouting_70904f1b"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ReadJson",
             "request": "launch",
             "mainClass": "ReadJson",
