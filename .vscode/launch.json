@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - AwtExample",
+            "request": "launch",
+            "mainClass": "AwtExample",
+            "projectName": "Digital_Scouting_70904f1b"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - AWTCounter",
             "request": "launch",
             "mainClass": "AWTCounter",
